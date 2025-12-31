@@ -6,6 +6,9 @@ family:
     - name: lpc11u66
     - name: lpc11u67
     - name: lpc11u68
+  - name: lpc84x
+    socs:
+    - name: lpc845
   - name: lpc51u68
     socs:
     - name: lpc51u68
