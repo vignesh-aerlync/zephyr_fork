@@ -2,6 +2,8 @@ identifier: lpc845brk
 name: LPC845 Breakout Board
 type: mcu
 arch: arm
+ram: 16
+flash: 64
 toolchain:
   - zephyr
 supported:
