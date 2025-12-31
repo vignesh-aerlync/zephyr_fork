@@ -36,16 +36,16 @@ The LPC845-BRK board is based on the NXP LPC845 MCU and provides:
 Connections and IOs
 ===================
 
-The LPC845 uses a switch matrix and IOCON block to configure pin functions.
+The LPC845 uses a switch matrix (SWM) and an IOCON block to configure pin functions.
 
 Default pin configuration:
 
 +---------+-----------------+-------------------+
 | Name    | Function        | Usage             |
 +=========+=================+===================+
-| PIO0_24 | UART            | USART0 TX         |
+| PIO0_24 | UART0 TXD       | Console TX        |
 +---------+-----------------+-------------------+
-| PIO0_25 | UART            | USART0 RX         |
+| PIO0_25 | UART0 RXD       | Console RX        |
 +---------+-----------------+-------------------+
 | PIO1_0  | GPIO            | GREEN LED         |
 +---------+-----------------+-------------------+
