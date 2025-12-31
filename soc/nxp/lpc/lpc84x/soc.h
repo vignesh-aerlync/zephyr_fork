@@ -4,15 +4,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#ifndef _SOC_H_
-#define _SOC_H_
+#ifndef ZEPHYR_SOC_ARM_NXP_LPC_LPC84X_SOC_H_
+#define ZEPHYR_SOC_ARM_NXP_LPC_LPC84X_SOC_H_
 
 #include <zephyr/sys/util.h>
 
-/*
- * Include MCUX device registers FIRST
- * This provides CMSIS config, IRQn_Type, and peripheral definitions
- */
+#ifdef CONFIG_SOC_LPC845
+#ifndef CPU_LPC845M301JBD64
+#define CPU_LPC845M301JBD64
+#endif
+#endif
+
 #include <fsl_device_registers.h>
 
-#endif /* _SOC_H_ */
+#endif /* ZEPHYR_SOC_ARM_NXP_LPC_LPC84X_SOC_H_ */
