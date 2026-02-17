@@ -1,0 +1,18 @@
+# LPC84x PINCTRL configuration options
+
+# Copyright (c) 2026 Aerlync Labs Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config PINCTRL_LPC84X
+	bool "LPC84x pinctrl driver"
+	default y
+	depends on DT_HAS_NXP_LPC84X_SWM_ENABLED
+	help
+	Enable the LPC84x pinctrl driver.
+
+config PINCTRL_LPC84X_INIT_PRIORITY
+	int "Initialization priority"
+	default 40
+	depends on PINCTRL_LPC84X
+	help
+	Wait for clock control to be initialized.
