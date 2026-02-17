@@ -1,0 +1,55 @@
+/*
+ * Copyright (c) 2026 Aerlync Labs Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <arm/armv6-m.dtsi>
+#include <mem.h>
+#include <zephyr/dt-bindings/clock/nxp_lpc84x.h>
+
+/ {
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu0: cpu@0 {
+			compatible = "arm,cortex-m0+";
+			reg = <0>;
+			clock-frequency = <30000000>;
+		};
+	};
+
+	sram0: memory@10000000 {
+		compatible = "mmio-sram";
+		reg = <0x10000000 DT_SIZE_K(16)>;
+	};
+
+	soc {
+		flash0: flash@0 {
+			compatible = "soc-nv-flash";
+			reg = <0x00000000 DT_SIZE_K(64)>;
+		};
+
+		syscon: syscon@40048000 {
+			compatible = "nxp,lpc84x";
+			reg = <0x40048000 0x1000>;
+			#clock-cells = <1>;
+		};
+
+		swm: swm@4000c000 {
+			compatible = "nxp,lpc84x-swm";
+			reg = <0x4000c000 0x1000>;
+		};
+
+		iocon: iocon@40044000 {
+			compatible = "nxp,lpc84x-iocon";
+			reg = <0x40044000 0x1000>;
+		};
+
+	};
+};
+
+&nvic {
+	arm,num-irq-priority-bits = <2>;
+};
