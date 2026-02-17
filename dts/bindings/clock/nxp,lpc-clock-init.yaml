@@ -1,0 +1,66 @@
+# Copyright (c) 2026, Aerlync Labs Inc
+# SPDX-License-Identifier: Apache-2.0
+
+description: LPC clock initialization using SDK APIs
+
+compatible: "nxp,lpc84x"
+
+properties:
+  reg:
+    type: array
+    required: true
+    description: SYSCON register base address and size.
+
+  "#clock-cells":
+    type: int
+    const: 1
+    description: |
+      Number of cells in a clock specifier.
+      The first cell is the clock ip name.
+
+  enable-fro:
+    type: boolean
+    description: Power up the FRO oscillator.
+
+  enable-froout:
+    type: boolean
+    description: Power up the FRO output.
+
+  fro-freq:
+    type: string
+    enum: ["18M", "24M", "30M"]
+    default: "30M"
+    description: FRO oscillator output frequency.
+
+  enable-sysosc:
+    type: boolean
+    description: Power up the system crystal oscillator (SYSOSC).
+
+  extclk-src:
+    type: string
+    enum: ["sysosc", "clkin"]
+    default: "sysosc"
+    description: External clock source
+
+  fro-low-power-boot:
+    type: boolean
+    description: Enable low power boot for FRO.
+
+  sysosc-freq:
+    type: int
+    description: System oscillator frequency in Hz. Required if enable-sysosc is true.
+
+  extclk-freq:
+    type: int
+    description: External clock frequency in Hz. Required for extclk-clkin.
+
+  ahb-clk-divider:
+    type: int
+    default: 1
+    description: AHB clock divider.
+
+  mainclk-src:
+    type: string
+    enum: ["fro", "extclk", "wdosc", "frodiv", "syspll"]
+    default: "fro"
+    description: Main clock source.
