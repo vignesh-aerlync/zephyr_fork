@@ -267,7 +267,6 @@ static int lpc84x_clock_control_get_rate(const struct device *dev,
 	case LPC84X_CLK_CTIMER0:
 		*rate = CLOCK_GetMainClkFreq();
 		break;
-
 	case LPC84X_CLK_ADC:
 		*rate = CLOCK_GetMainClkFreq();
 		break;
