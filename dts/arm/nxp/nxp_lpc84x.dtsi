@@ -43,6 +43,16 @@
 			fro-freq = "30M";
 			ahb-clk-divider = <1>;
 		};
+
+		swm: swm@4000c000 {
+			compatible = "nxp,lpc84x-swm";
+			reg = <0x4000c000 0x1000>;
+		};
+
+		iocon: iocon@40044000 {
+			compatible = "nxp,lpc84x-iocon";
+			reg = <0x40044000 0x1000>;
+		};
 	};
 };
 
