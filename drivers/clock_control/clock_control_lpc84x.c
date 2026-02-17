@@ -159,6 +159,7 @@ static int lpc84x_clock_control_on(const struct device *dev, clock_control_subsy
 	case LPC84X_CLK_SWM:
 	case LPC84X_CLK_IOCON:
 	case LPC84X_CLK_CTIMER0:
+	case LPC84X_CLK_FLASH:
 		break;
 
 	default:
@@ -201,6 +202,7 @@ static int lpc84x_clock_control_off(const struct device *dev, clock_control_subs
 	case LPC84X_CLK_SPI0:
 	case LPC84X_CLK_SPI1:
 	case LPC84X_CLK_CTIMER0:
+	case LPC84X_CLK_FLASH:
 		CLOCK_DisableClock((clock_ip_name_t)clk_id);
 		break;
 	default:
@@ -289,6 +291,7 @@ static DEVICE_API(clock_control, lpc84x_clock_api) = {
                                                                                                    \
 			uint32_t idx = DT_INST_ENUM_IDX(inst, fro_freq);                           \
 			if (idx >= ARRAY_SIZE(lpc84x_fro_freq_map)) {                              \
+				POWER_EnablePD(kPDRUNCFG_PD_FRO);                                  \
 				return -EINVAL;                                                    \
 			}                                                                          \
                                                                                                    \
