@@ -26,6 +26,7 @@ child-binding:
         property-allowlist:
           - bias-pull-up
           - bias-pull-down
+          - bias-disable
           - drive-open-drain
           - drive-push-pull
 
