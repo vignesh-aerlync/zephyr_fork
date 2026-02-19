@@ -1,0 +1,9 @@
+#
+# Copyright 2026, Aerlync Labs Inc
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC=30000000
+CONFIG_CLOCK_CONTROL=y
+CONFIG_BUILD_OUTPUT_HEX=y
