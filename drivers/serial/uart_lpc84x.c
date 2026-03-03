@@ -199,46 +199,21 @@ static void lpc84x_uart_irq_callback_set(const struct device *dev,
 static void lpc84x_uart_isr(const struct device *dev)
 {
 	struct lpc84x_uart_data *data = dev->data;
+	USART_Type *base = DEV_BASE(dev);
 
-	if (data->callback) {
+	if (data->callback != NULL) {
 		data->callback(dev, data->callback_data);
+	}
+
+	uint32_t flags = USART_GetStatusFlags(base);
+	uint32_t error_mask = kUSART_HardwareOverrunFlag | kUSART_ParityErrorFlag |
+			      kUSART_FramErrorFlag | kUSART_RxNoiseFlag;
+
+	if (flags & error_mask) {
+		USART_ClearStatusFlags(base, error_mask);
 	}
 }
 #endif /* CONFIG_UART_INTERRUPT_DRIVEN */
-
-static int lpc84x_uart_apply_config(const struct device *dev, const usart_config_t *usart_cfg,
-				    uint32_t clock_freq)
-{
-	USART_Type *base = DEV_BASE(dev);
-
-	/* Disable USART */
-	base->CFG &= ~USART_CFG_ENABLE_MASK;
-
-	/* Set configuration */
-	base->CFG = (usart_cfg->syncMode != kUSART_SyncModeDisabled ? USART_CFG_SYNCEN_MASK : 0) |
-		    USART_CFG_PARITYSEL(usart_cfg->parityMode) |
-		    USART_CFG_STOPLEN(usart_cfg->stopBitCount) |
-		    USART_CFG_SYNCEN((uint32_t)usart_cfg->syncMode >> 1) |
-		    USART_CFG_DATALEN((uint8_t)usart_cfg->bitCountPerChar) |
-		    USART_CFG_LOOP(usart_cfg->loopback ? 1U : 0U) |
-		    USART_CFG_SYNCMST(usart_cfg->syncMode) |
-		    USART_CFG_CLKPOL(usart_cfg->clockPolarity) |
-		    USART_CFG_CTSEN(usart_cfg->enableHardwareFlowControl ? 1U : 0U);
-
-	/* Set baudrate before enabling */
-	if (USART_SetBaudRate(base, usart_cfg->baudRate_Bps, clock_freq) != kStatus_Success) {
-		return -EIO;
-	}
-
-	/* Enable USART */
-	base->CFG |= USART_CFG_ENABLE_MASK;
-
-	/* Enable TX/RX */
-	USART_EnableTx(base, usart_cfg->enableTx);
-	USART_EnableRx(base, usart_cfg->enableRx);
-
-	return 0;
-}
 
 #ifdef CONFIG_UART_USE_RUNTIME_CONFIGURE
 static void lpc84x_uart_wait_for_idle(const struct device *dev)
@@ -322,9 +297,9 @@ static int lpc84x_uart_configure(const struct device *dev, const struct uart_con
 
 	lpc84x_uart_wait_for_idle(dev);
 
-	if (lpc84x_uart_apply_config(dev, &usart_cfg, clock_freq) != 0) {
+	if (USART_Init(DEV_BASE(dev), &usart_cfg, clock_freq) != kStatus_Success) {
 		/* Restore hardware configuration to previous state */
-		lpc84x_uart_apply_config(dev, &data->usart_cfg, clock_freq);
+		USART_Init(DEV_BASE(dev), &data->usart_cfg, clock_freq);
 		return -EIO;
 	}
 
@@ -429,14 +404,11 @@ static int lpc84x_uart_init(const struct device *dev)
 	data->usart_cfg.enableTx = true;
 	data->usart_cfg.enableRx = true;
 
-	/* Manual initialization
-	 * USART_Init enables continuous SCLK for synchronous mode,
-	 * but UART doesn't need synchronization.
-	 */
-	err = lpc84x_uart_apply_config(dev, &data->usart_cfg, clock_freq);
+	err = USART_Init(DEV_BASE(dev), &data->usart_cfg, clock_freq);
 	if (err) {
-		LOG_ERR("failed to set baud rate for USART%d (base %p, rate %u, clock %u)",
-			instance, DEV_BASE(dev), config->baudrate, clock_freq);
+		LOG_ERR("USART%d: Failed to initialize peripheral (base %p, baud %u, clock %u, err "
+			"%d)",
+			instance, DEV_BASE(dev), config->baudrate, clock_freq, err);
 		return err;
 	}
 
