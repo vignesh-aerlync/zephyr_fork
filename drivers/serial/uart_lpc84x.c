@@ -177,13 +177,11 @@ static int lpc84x_uart_irq_is_pending(const struct device *dev)
 	       lpc84x_uart_irq_err_ready(dev);
 }
 
-static int lpc84x_uart_irq_update(const struct device *dev)
+static void lpc84x_uart_irq_update(const struct device *dev)
 {
 	struct lpc84x_uart_data *data = dev->data;
 
 	data->irq_status = USART_GetStatusFlags(DEV_BASE(dev));
-
-	return 1;
 }
 
 static void lpc84x_uart_irq_callback_set(const struct device *dev,
