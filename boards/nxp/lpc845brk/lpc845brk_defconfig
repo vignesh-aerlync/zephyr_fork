@@ -1,6 +1,7 @@
 # Copyright (c) 2026, Aerlync Labs Inc.
 # SPDX-License-Identifier: Apache-2.0
 
+# Enable clock control subsystem
 CONFIG_CLOCK_CONTROL=y
 
 CONFIG_SERIAL=y
