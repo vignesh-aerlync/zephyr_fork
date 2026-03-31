@@ -94,6 +94,71 @@
 	status = "okay";
 };
 
+&i2c0 {
+	status = "okay";
+	clock-source = "fro";
+	pinctrl-0 = <&i2c0_default>;
+	pinctrl-names = "default";
+};
+
+&i2c1 {
+	status = "okay";
+	clock-source = "fro";
+	pinctrl-0 = <&i2c1_default>;
+	pinctrl-names = "default";
+};
+
+&i2c2 {
+	status = "okay";
+	clock-source = "fro";
+	pinctrl-0 = <&i2c2_default>;
+	pinctrl-names = "default";
+};
+
+&i2c3 {
+	status = "okay";
+	clock-source = "fro";
+	pinctrl-0 = <&i2c3_default>;
+	pinctrl-names = "default";
+};
+
+&swm {
+	i2c0_default: i2c0_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_F(LPC84X_SWM_I2C0_SCL, P0_10)>,
+				 <LPC84X_PINMUX_F(LPC84X_SWM_I2C0_SDA, P0_11)>;
+			drive-open-drain;
+		};
+	};
+
+	i2c1_default: i2c1_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_M(LPC84X_SWM_I2C1_SCL, P0_28)>,
+				 <LPC84X_PINMUX_M(LPC84X_SWM_I2C1_SDA, P0_27)>;
+			bias-pull-up;
+			drive-open-drain;
+		};
+	};
+
+	i2c2_default: i2c2_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_M(LPC84X_SWM_I2C2_SCL, P0_8)>,
+				 <LPC84X_PINMUX_M(LPC84X_SWM_I2C2_SDA, P0_9)>;
+			bias-pull-up;
+			drive-open-drain;
+		};
+	};
+
+	i2c3_default: i2c3_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_M(LPC84X_SWM_I2C3_SCL, P0_0)>,
+				 <LPC84X_PINMUX_M(LPC84X_SWM_I2C3_SDA, P0_1)>;
+			bias-pull-up;
+			drive-open-drain;
+		};
+	};
+};
+
 &pint {
 	status = "okay";
 };
