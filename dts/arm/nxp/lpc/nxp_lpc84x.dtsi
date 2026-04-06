@@ -141,6 +141,16 @@
 			num-lines = <8>;
 			status = "disabled";
 		};
+
+		dma0: dma-controller@50008000 {
+			compatible = "nxp,lpc84x-dma";
+			reg = <0x50008000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_DMA>;
+			interrupts = <20 0>;
+			dma-channels = <25>;
+			#dma-cells = <1>;
+			status = "disabled";
+		};
 	};
 };
 
