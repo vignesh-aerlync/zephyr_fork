@@ -67,6 +67,10 @@
 	status = "okay";
 };
 
+&dma0 {
+	status = "okay";
+};
+
 &uart0 {
 	status = "okay";
 	clock-source = "frg0";
