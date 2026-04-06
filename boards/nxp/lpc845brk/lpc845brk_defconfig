@@ -18,5 +18,8 @@ CONFIG_UART_CONSOLE=y
 # Enable GPIO driver
 CONFIG_GPIO=y
 
+# Enable DMA driver
+CONFIG_DMA=y
+
 # Build additional HEX output image
 CONFIG_BUILD_OUTPUT_HEX=y
