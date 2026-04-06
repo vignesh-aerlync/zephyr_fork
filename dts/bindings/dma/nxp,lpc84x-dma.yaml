@@ -1,0 +1,21 @@
+# Copyright (c) 2026 Aerlync Labs Inc
+# SPDX-License-Identifier: Apache-2.0
+
+description: LPC84X DMA Controller
+
+compatible: "nxp,lpc84x-dma"
+
+include: dma-controller.yaml
+
+dma-cells:
+  - channel
+
+properties:
+  reg:
+    required: true
+
+  clocks:
+    required: true
+
+  interrupts:
+    required: true
