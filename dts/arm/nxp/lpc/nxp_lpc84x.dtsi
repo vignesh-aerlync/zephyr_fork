@@ -172,6 +172,14 @@
 			#io-channel-cells = <1>;
 			interrupts = <16 2>, <17 2>, <18 2>, <19 2>;
 			clk-divider = <1>;
+		
+		dma0: dma-controller@50008000 {
+			compatible = "nxp,lpc84x-dma";
+			reg = <0x50008000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_DMA>;
+			interrupts = <20 0>;
+			dma-channels = <25>;
+			#dma-cells = <1>;
 			status = "disabled";
 		};
 	};
