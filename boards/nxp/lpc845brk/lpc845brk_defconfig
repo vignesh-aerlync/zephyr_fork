@@ -28,4 +28,8 @@ CONFIG_GPIO=y
 
 CONFIG_ADC=y
 
+# Enable DMA driver
+CONFIG_DMA=y
+
+# Build additional HEX output image
 CONFIG_BUILD_OUTPUT_HEX=y
