@@ -96,6 +96,49 @@
 #define LPC84X_SWM_T0_CAP_CHN1   58U /**< T0 CAP CHN1 */
 #define LPC84X_SWM_T0_CAP_CHN2   59U /**< T0 CAP CHN2 */
 
+/* Fixed function bit positions in PINENABLE0 */
+#define LPC84X_SWM_ACMP_INPUT1 0U
+#define LPC84X_SWM_ACMP_INPUT2 1U
+#define LPC84X_SWM_ACMP_INPUT3 2U
+#define LPC84X_SWM_ACMP_INPUT4 3U
+#define LPC84X_SWM_ACMP_INPUT5 4U
+#define LPC84X_SWM_SWCLK       5U
+#define LPC84X_SWM_SWDIO       6U
+#define LPC84X_SWM_XTALIN      7U
+#define LPC84X_SWM_XTALOUT     8U
+#define LPC84X_SWM_RESETN      9U
+#define LPC84X_SWM_CLKIN       10U
+#define LPC84X_SWM_VDDCMP      11U
+#define LPC84X_SWM_I2C0_SDA    12U
+#define LPC84X_SWM_I2C0_SCL    13U
+#define LPC84X_SWM_ADC_0       14U
+#define LPC84X_SWM_ADC_1       15U
+#define LPC84X_SWM_ADC_2       16U
+#define LPC84X_SWM_ADC_3       17U
+#define LPC84X_SWM_ADC_4       18U
+#define LPC84X_SWM_ADC_5       19U
+#define LPC84X_SWM_ADC_6       20U
+#define LPC84X_SWM_ADC_7       21U
+#define LPC84X_SWM_ADC_8       22U
+#define LPC84X_SWM_ADC_9       23U
+#define LPC84X_SWM_ADC_10      24U
+#define LPC84X_SWM_ADC_11      25U
+#define LPC84X_SWM_DAC_OUT0    26U
+#define LPC84X_SWM_DAC_OUT1    27U
+#define LPC84X_SWM_CAPT_X0     28U
+#define LPC84X_SWM_CAPT_X1     29U
+#define LPC84X_SWM_CAPT_X2     30U
+#define LPC84X_SWM_CAPT_X3     31U
+
+/* Fixed function bit positions in PINENABLE1 (32+) */
+#define LPC84X_SWM_CAPT_X4 32U
+#define LPC84X_SWM_CAPT_X5 33U
+#define LPC84X_SWM_CAPT_X6 34U
+#define LPC84X_SWM_CAPT_X7 35U
+#define LPC84X_SWM_CAPT_X8 36U
+#define LPC84X_SWM_CAPT_YL 37U
+#define LPC84X_SWM_CAPT_YH 38U
+
 /**
  * Physical port pin identifiers used by SWM.
  * Port 0 pins range from 0–31.
