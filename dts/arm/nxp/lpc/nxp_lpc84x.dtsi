@@ -164,6 +164,16 @@
 			prescale = <0>;
 			status = "disabled";
 		};
+		
+		adc: adc@4001c000 {
+			compatible = "nxp,lpc84x-adc";
+			reg = <0x4001c000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_ADC>;
+			#io-channel-cells = <1>;
+			interrupts = <16 2>, <17 2>, <18 2>, <19 2>;
+			clk-divider = <1>;
+			status = "disabled";
+		};
 	};
 };
 
