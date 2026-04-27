@@ -1,0 +1,46 @@
+# Copyright (c) 2026, Aerlync Labs Inc
+# SPDX-License-Identifier: Apache-2.0
+
+description: NXP LPC84x ADC
+
+compatible: "nxp,lpc84x-adc"
+
+include:
+  - name: adc-controller.yaml
+  - name: pinctrl-device.yaml
+
+properties:
+  reg:
+    required: true
+
+  interrupts:
+    required: true
+
+  clocks:
+    required: true
+
+  clk-divider:
+    type: int
+    required: true
+    description: |
+      Clock divider for the ADC peripheral clock.
+      The ADC functional clock is derived from the main system clock
+      divided by this value. Valid range is 1 to 256.
+
+  nxp,burst-mode:
+    type: boolean
+    description: |
+      Enable hardware burst mode for Sequence A.
+      When enabled, the ADC will continuously cycle through the selected
+      channels in hardware. When disabled, the ADC requires a software
+      trigger for each conversion cycle.
+
+  nxp,ref-internal-mv:
+    type: int
+    default: 3300
+    description: |
+      Internal reference voltage in millivolts.
+      Default is 3300 mV (3.3V) for most LPC84x variants.
+
+io-channel-cells:
+  - input
