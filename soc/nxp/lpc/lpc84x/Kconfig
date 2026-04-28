@@ -10,3 +10,4 @@ config SOC_SERIES_LPC84X
 	select CLOCK_CONTROL
 	select HAS_MCUX
 	select PINCTRL
+	select HAS_PM
