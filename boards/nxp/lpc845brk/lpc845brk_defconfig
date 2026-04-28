@@ -15,5 +15,8 @@ CONFIG_UART_LPC84X=y
 CONFIG_CONSOLE=y
 CONFIG_UART_CONSOLE=y
 
+# Enable GPIO driver
+CONFIG_GPIO=y
+
 # Build additional HEX output image
 CONFIG_BUILD_OUTPUT_HEX=y
