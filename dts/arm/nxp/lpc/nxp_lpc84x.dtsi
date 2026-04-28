@@ -139,6 +139,45 @@
 			interrupts = <24 2>, <25 2>, <26 2>, <27 2>,
 				     <28 2>, <29 2>, <30 2>, <31 2>;
 			num-lines = <8>;
+		};
+
+		i2c0: i2c@40050000 {
+			compatible = "nxp,lpc84x-i2c";
+			reg = <0x40050000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_I2C0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			interrupts = <8 0>;
+			status = "disabled";
+		};
+
+		i2c1: i2c@40054000 {
+			compatible = "nxp,lpc84x-i2c";
+			reg = <0x040054000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_I2C1>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			interrupts = <7 0>;
+			status = "disabled";
+		};
+
+		i2c2: i2c@40030000 {
+			compatible = "nxp,lpc84x-i2c";
+			reg = <0x40030000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_I2C2>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			interrupts = <21 0>;
+			status = "disabled";
+		};
+
+		i2c3: i2c@40034000 {
+			compatible = "nxp,lpc84x-i2c";
+			reg = <0x40034000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_I2C3>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			interrupts = <22 0>;
 			status = "disabled";
 		};
 	};
