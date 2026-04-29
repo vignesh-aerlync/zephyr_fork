@@ -10,6 +10,7 @@
 #include <zephyr/dt-bindings/pinctrl/lpc84x-pinctrl.h>
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <zephyr/dt-bindings/dma/lpc84x-dma.h>
 
 / {
 	model = "NXP LPC845-BRK Board";
@@ -67,10 +68,16 @@
 	status = "okay";
 };
 
+&dma0 {
+	status = "okay";
+};
+
 &uart0 {
 	status = "okay";
 	clock-source = "frg0";
 	current-speed = <115200>;
+	dmas = <&dma0 LPC84X_DMA_UART0_RX>,
+	       <&dma0 LPC84X_DMA_UART0_TX>;
 	pinctrl-0 = <&uart0_default>;
 	pinctrl-names = "default";
 };
