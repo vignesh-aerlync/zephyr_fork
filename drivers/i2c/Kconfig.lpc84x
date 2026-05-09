@@ -1,0 +1,9 @@
+# Copyright (c) 2026 Aerlync Labs Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config I2C_LPC84X
+	bool "LPC84x I2C driver"
+	default y
+	depends on DT_HAS_NXP_LPC84X_I2C_ENABLED
+	help
+	 Enable I2C support for LPC84X SoCs.

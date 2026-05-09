@@ -96,6 +96,47 @@
 #define LPC84X_SWM_T0_CAP_CHN1   58U /**< T0 CAP CHN1 */
 #define LPC84X_SWM_T0_CAP_CHN2   59U /**< T0 CAP CHN2 */
 
+/* SWM fixed pin selection */
+#define LPC84X_SWM_ACMP_INPUT1 0U  /**< ACMP_INPUT1   */
+#define LPC84X_SWM_ACMP_INPUT2 1U  /**< ACMP_INPUT2   */
+#define LPC84X_SWM_ACMP_INPUT3 2U  /**< ACMP_INPUT3   */
+#define LPC84X_SWM_ACMP_INPUT4 3U  /**< ACMP_INPUT4   */
+#define LPC84X_SWM_ACMP_INPUT5 4U  /**< ACMP_INPUT5   */
+#define LPC84X_SWM_SWCLK       5U  /**< SWCLK         */
+#define LPC84X_SWM_SWDIO       6U  /**< SWDIO         */
+#define LPC84X_SWM_XTALIN      7U  /**< XTALIN        */
+#define LPC84X_SWM_XTALOUT     8U  /**< XTALOUT       */
+#define LPC84X_SWM_RESETN      9U  /**< RESETN        */
+#define LPC84X_SWM_CLKIN       10U /**< CLKIN         */
+#define LPC84X_SWM_VDDCMP      11U /**< VDDCMP        */
+#define LPC84X_SWM_I2C0_SDA    12U /**< I2C0_SDA      */
+#define LPC84X_SWM_I2C0_SCL    13U /**< I2C0_SCL      */
+#define LPC84X_SWM_ADC_CHN0    14U /**< ADC_CHN0      */
+#define LPC84X_SWM_ADC_CHN1    15U /**< ADC_CHN1      */
+#define LPC84X_SWM_ADC_CHN2    16U /**< ADC_CHN2      */
+#define LPC84X_SWM_ADC_CHN3    17U /**< ADC_CHN3      */
+#define LPC84X_SWM_ADC_CHN4    18U /**< ADC_CHN4      */
+#define LPC84X_SWM_ADC_CHN5    19U /**< ADC_CHN5      */
+#define LPC84X_SWM_ADC_CHN6    20U /**< ADC_CHN6      */
+#define LPC84X_SWM_ADC_CHN7    21U /**< ADC_CHN7      */
+#define LPC84X_SWM_ADC_CHN8    22U /**< ADC_CHN8      */
+#define LPC84X_SWM_ADC_CHN9    23U /**< ADC_CHN9      */
+#define LPC84X_SWM_ADC_CHN10   24U /**< ADC_CHN10     */
+#define LPC84X_SWM_ADC_CHN11   25U /**< ADC_CHN11     */
+#define LPC84X_SWM_DAC_OUT0    26U /**< DACOUT0       */
+#define LPC84X_SWM_DAC_OUT1    27U /**< DACOUT1       */
+#define LPC84X_SWM_CAPT_X0     28U /**< CAPT_X0 (Mutual capacitance touch sensor) */
+#define LPC84X_SWM_CAPT_X1     29U /**< CAPT_X1 */
+#define LPC84X_SWM_CAPT_X2     30U /**< CAPT_X2 */
+#define LPC84X_SWM_CAPT_X3     31U /**< CAPT_X3 */
+#define LPC84X_SWM_CAPT_X4     32U /**< CAPT_X4 (Starts PINENABLE1 range) */
+#define LPC84X_SWM_CAPT_X5     33U /**< CAPT_X5 */
+#define LPC84X_SWM_CAPT_X6     34U /**< CAPT_X6 */
+#define LPC84X_SWM_CAPT_X7     35U /**< CAPT_X7 */
+#define LPC84X_SWM_CAPT_X8     36U /**< CAPT_X8 */
+#define LPC84X_SWM_CAPT_YL     37U /**< CAPT_YL (Measurement capacitor) */
+#define LPC84X_SWM_CAPT_YH     38U /**< CAPT_YH */
+
 /**
  * Physical port pin identifiers used by SWM.
  * Port 0 pins range from 0–31.

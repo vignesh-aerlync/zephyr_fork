@@ -20,3 +20,7 @@ CONFIG_GPIO=y
 
 # Build additional HEX output image
 CONFIG_BUILD_OUTPUT_HEX=y
+
+#Enabled I2C driver
+CONFIG_I2C=y
+CONFIG_I2C_SHELL=y
