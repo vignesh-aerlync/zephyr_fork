@@ -27,13 +27,24 @@
 
 	sram0: memory@10000000 {
 		compatible = "mmio-sram";
-		reg = <0x10000000 DT_SIZE_K(8)>;
 	};
 
 	soc {
-		flash0: flash@0 {
-			compatible = "soc-nv-flash";
-			reg = <0x00000000 DT_SIZE_K(64)>;
+		iap: flash-controller@40040000 {
+			compatible = "nxp,iap-fmc84x";
+			reg = <0x40040000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_FLASH>;
+			#address-cells = <1>;
+			flash-access-time = <2>;
+			#size-cells = <1>;
+			status = "disabled";
+
+			flash0: flash@0 {
+				compatible = "soc-nv-flash";
+				reg = <0x00000000 DT_SIZE_K(64)>;
+				erase-block-size = <1024>;
+				write-block-size = <64>;
+			};
 		};
 
 		syscon: syscon@40048000 {
