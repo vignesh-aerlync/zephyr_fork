@@ -9,6 +9,7 @@
 #include <zephyr/drivers/uart.h>
 #include <zephyr/drivers/clock_control.h>
 #include <zephyr/drivers/pinctrl.h>
+#include <zephyr/drivers/reset.h>
 #include <zephyr/irq.h>
 
 #include <fsl_usart.h>
@@ -20,6 +21,7 @@ struct lpc84x_uart_config {
 	DEVICE_MMIO_ROM;
 	const struct device *clock_dev;
 	clock_control_subsys_t clock_subsys;
+	const struct reset_dt_spec reset;
 	const struct pinctrl_dev_config *pcfg;
 	uint32_t baudrate;
 	void (*irq_config_func)(const struct device *dev);
@@ -403,6 +405,18 @@ static int lpc84x_uart_init(const struct device *dev)
 		return -ENODEV;
 	}
 
+	if (!device_is_ready(config->reset.dev)) {
+		LOG_ERR_DEVICE_NOT_READY(config->reset.dev);
+		return -ENODEV;
+	}
+
+	/* Reset UART peripheral */
+	err = reset_line_deassert_dt(&config->reset);
+	if (err) {
+		LOG_ERR("failed to deassert reset (err %d)", err);
+		return err;
+	}
+
 	/* Apply default pin control state to select RX and TX pins */
 	err = pinctrl_apply_state(config->pcfg, PINCTRL_STATE_DEFAULT);
 	if (err) {
@@ -497,6 +511,7 @@ static DEVICE_API(uart, lpc84x_uart_driver_api) = {
 		DEVICE_MMIO_ROM_INIT(DT_DRV_INST(n)),                                              \
 		.clock_dev = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR(n)),                                \
 		.clock_subsys = (clock_control_subsys_t)DT_INST_CLOCKS_CELL(n, name),              \
+		.reset = RESET_DT_SPEC_INST_GET(n),                                                \
 		.pcfg = PINCTRL_DT_INST_DEV_CONFIG_GET(n),                                         \
 		.baudrate = DT_INST_PROP(n, current_speed),                                        \
 		LPC84X_UART_IRQ_CFG_FUNC_SET(n)};                                                  \
