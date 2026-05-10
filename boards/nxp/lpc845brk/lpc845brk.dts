@@ -20,6 +20,7 @@
 		zephyr,flash = &flash0;
 		zephyr,console = &uart0;
 		zephyr,shell-uart = &uart0;
+		zephyr,flash-controller = &iap;
 	};
 
 	aliases {
@@ -95,5 +96,9 @@
 };
 
 &pint {
+	status = "okay";
+};
+
+&iap {
 	status = "okay";
 };
