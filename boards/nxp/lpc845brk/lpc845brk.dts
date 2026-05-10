@@ -64,6 +64,10 @@
 	status = "okay";
 };
 
+&iap {
+	status = "okay";
+};
+
 &syscon {
 	status = "okay";
 };
