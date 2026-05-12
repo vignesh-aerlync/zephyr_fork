@@ -8,3 +8,10 @@ config RESET_NXP_SYSCON
 	help
 	  Enable the NXP syscon reset controller driver.
 	  Syscon is found on LPC parts and LPC heritage parts.
+
+config RESET_NXP_LPC84X_SYSCON
+	bool "NXP LPC84x SYSCON reset controller driver"
+	default y
+	depends on DT_HAS_NXP_LPC84X_SYSCON_RESET_ENABLED
+	help
+	  Enable the NXP LPC84x SYSCON reset controller driver.

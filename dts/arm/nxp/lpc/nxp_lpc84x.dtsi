@@ -7,6 +7,7 @@
 #include <arm/armv6-m.dtsi>
 #include <mem.h>
 #include <zephyr/dt-bindings/clock/lpc84x-clock.h>
+#include <zephyr/dt-bindings/reset/nxp_lpc84x_reset.h>
 
 / {
 	cpus {
@@ -43,6 +44,11 @@
 			frg0-clk-src = "fro";
 			ahb-clk-divider = <1>;
 			status = "disabled";
+
+			reset: reset {
+				compatible = "nxp,lpc84x-syscon-reset";
+				#reset-cells = <1>;
+			};
 		};
 
 		swm: swm@4000c000 {
@@ -63,6 +69,7 @@
 			compatible = "nxp,lpc84x-uart";
 			reg = <0x40064000 0x4000>;
 			clocks = <&syscon LPC84X_CLK_UART0>;
+			resets = <&reset LPC84X_RST_UART0>;
 			interrupts = <3 0>;
 			status = "disabled";
 		};
@@ -71,6 +78,7 @@
 			compatible = "nxp,lpc84x-uart";
 			reg = <0x40068000 0x4000>;
 			clocks = <&syscon LPC84X_CLK_UART1>;
+			resets = <&reset LPC84X_RST_UART1>;
 			interrupts = <4 0>;
 			status = "disabled";
 		};
@@ -79,6 +87,7 @@
 			compatible = "nxp,lpc84x-uart";
 			reg = <0x4006c000 0x4000>;
 			clocks = <&syscon LPC84X_CLK_UART2>;
+			resets = <&reset LPC84X_RST_UART2>;
 			interrupts = <5 0>;
 			status = "disabled";
 		};
@@ -87,6 +96,7 @@
 			compatible = "nxp,lpc84x-uart";
 			reg = <0x40070000 0x4000>;
 			clocks = <&syscon LPC84X_CLK_UART3>;
+			resets = <&reset LPC84X_RST_UART3>;
 			interrupts = <30 0>;
 			status = "disabled";
 		};
@@ -95,6 +105,7 @@
 			compatible = "nxp,lpc84x-uart";
 			reg = <0x40074000 0x4000>;
 			clocks = <&syscon LPC84X_CLK_UART4>;
+			resets = <&reset LPC84X_RST_UART4>;
 			interrupts = <31 0>;
 			status = "disabled";
 		};

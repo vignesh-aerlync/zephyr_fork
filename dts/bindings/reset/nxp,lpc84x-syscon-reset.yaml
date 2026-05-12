@@ -1,0 +1,18 @@
+# Copyright 2026 Aerlync Labs Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  NXP LPC84x SYSCON peripheral reset controller.
+  Manages resets via PRESETCTRL0/1 using read-modify-write.
+  Reset ID encoding: ((register_index << 16) | bit_position).
+
+compatible: "nxp,lpc84x-syscon-reset"
+
+include: [reset-controller.yaml]
+
+properties:
+  "#reset-cells":
+    const: 1
+
+reset-cells:
+  - id

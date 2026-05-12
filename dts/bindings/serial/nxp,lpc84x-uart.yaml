@@ -8,6 +8,7 @@ compatible: "nxp,lpc84x-uart"
 include:
   - name: uart-controller.yaml
   - name: pinctrl-device.yaml
+  - name: reset-device.yaml
 
 properties:
   reg:
@@ -17,6 +18,9 @@ properties:
     required: true
 
   clocks:
+    required: true
+
+  resets:
     required: true
 
   clock-source:
