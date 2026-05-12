@@ -160,6 +160,7 @@ static int lpc84x_clock_control_on(const struct device *dev, clock_control_subsy
 	case LPC84X_CLK_IOCON:
 	case LPC84X_CLK_CTIMER0:
 	case LPC84X_CLK_FLASH:
+	case LPC84X_CLK_ADC:
 		break;
 
 	default:
@@ -203,6 +204,7 @@ static int lpc84x_clock_control_off(const struct device *dev, clock_control_subs
 	case LPC84X_CLK_SPI1:
 	case LPC84X_CLK_CTIMER0:
 	case LPC84X_CLK_FLASH:
+	case LPC84X_CLK_ADC:
 		CLOCK_DisableClock((clock_ip_name_t)clk_id);
 		break;
 	default:
@@ -264,6 +266,9 @@ static int lpc84x_clock_control_get_rate(const struct device *dev,
 		*rate = CLOCK_GetMainClkFreq();
 		break;
 
+	case LPC84X_CLK_ADC:
+		*rate = CLOCK_GetMainClkFreq();
+		break;
 	default:
 		return -ENOTSUP;
 	}
