@@ -17,6 +17,38 @@
 			compatible = "arm,cortex-m0+";
 			reg = <0>;
 			clock-frequency = <30000000>;
+			cpu-power-states = <&sleep &deep_sleep &power_down &deep_power_down>;
+		};
+
+		power-states {
+			sleep: sleep {
+				compatible = "zephyr,power-state";
+				power-state-name = "runtime-idle";
+				min-residency-us = <60>;
+				exit-latency-us = <10>;
+			};
+
+			deep_sleep: deep_sleep {
+				compatible = "zephyr,power-state";
+				power-state-name = "standby";
+				min-residency-us = <1300>;
+				exit-latency-us = <20>;
+			};
+
+			power_down: power_down {
+				compatible = "zephyr,power-state";
+				power-state-name = "suspend-to-idle";
+				min-residency-us = <2000>;
+				exit-latency-us = <500>;
+			};
+
+			deep_power_down: deep_power_down {
+				compatible = "zephyr,power-state";
+				power-state-name = "soft-off";
+				min-residency-us = <10000>;
+				exit-latency-us = <500>;
+				status = "disabled";
+			};
 		};
 	};
 
