@@ -106,3 +106,7 @@
 &pint {
 	status = "okay";
 };
+
+&adc {
+	status = "okay";
+};
