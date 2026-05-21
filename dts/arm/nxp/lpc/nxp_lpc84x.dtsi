@@ -141,6 +141,18 @@
 			num-lines = <8>;
 			status = "disabled";
 		};
+
+		ctimer0: ctimer@40038000 {
+			compatible = "nxp,lpc-ctimer";
+			reg = <0x40038000 0x4000>;
+			interrupts = <23 0>;
+			clk-source = <3>;
+			clocks = <&syscon LPC84X_CLK_CTIMER0>;
+			mode = <0>;
+			input = <0>;
+			prescale = <0>;
+			status = "disabled";
+		};
 	};
 };
 
