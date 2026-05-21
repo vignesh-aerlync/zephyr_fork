@@ -27,6 +27,7 @@
 		led1 = &led1;
 		led2 = &led2;
 		sw0 = &user_btn;
+		counter0 = &ctimer0;
 	};
 
 	leds {
@@ -95,5 +96,9 @@
 };
 
 &pint {
+	status = "okay";
+};
+
+&ctimer0 {
 	status = "okay";
 };
