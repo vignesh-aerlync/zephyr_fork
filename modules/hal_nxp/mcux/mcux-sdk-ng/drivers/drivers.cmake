@@ -15,6 +15,7 @@ endif()
 set_variable_ifdef(CONFIG_GPIO_MCUX_IGPIO       CONFIG_MCUX_COMPONENT_driver.igpio)
 set_variable_ifdef(CONFIG_ADC_MCUX_LPADC        CONFIG_MCUX_COMPONENT_driver.lpadc)
 set_variable_ifdef(CONFIG_COUNTER_MCUX_CTIMER   CONFIG_MCUX_COMPONENT_driver.ctimer)
+zephyr_library_compile_definitions_ifdef(CONFIG_COUNTER_MCUX_CTIMER_LPC84X FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL=1)
 set_variable_ifdef(CONFIG_COUNTER_MCUX_LPC_RTC  CONFIG_MCUX_COMPONENT_driver.lpc_rtc)
 set_variable_ifdef(CONFIG_GLIKEY_MCUX_GLIKEY    CONFIG_MCUX_COMPONENT_driver.glikey)
 
