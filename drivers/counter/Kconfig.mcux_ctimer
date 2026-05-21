@@ -17,3 +17,10 @@ config COUNTER_MCUX_CTIMER_RESERVE_CHANNEL_FOR_SETTOP
 	help
 	  This reserves a CTimer channel to set the top value. Without
 	  this the set top value can be set only to the max counter value.
+
+config COUNTER_MCUX_CTIMER_LPC84X
+	bool "LPC84x SoC series"
+	default y
+	depends on SOC_SERIES_LPC84X
+	help
+	  Enable the Ctimer driver for lpc84x SoC.
