@@ -15,7 +15,9 @@
 
 LOG_MODULE_REGISTER(mcux_ctimer, CONFIG_COUNTER_LOG_LEVEL);
 
-#ifdef CONFIG_COUNTER_MCUX_CTIMER_RESERVE_CHANNEL_FOR_SETTOP
+#if defined(CONFIG_COUNTER_MCUX_CTIMER_LPC84X)
+#define NUM_CHANNELS 1
+#elif defined(CONFIG_COUNTER_MCUX_CTIMER_RESERVE_CHANNEL_FOR_SETTOP)
 /* One of the CTimer channels is reserved to implement set_top_value API */
 #define NUM_CHANNELS 3
 #else
@@ -259,6 +261,15 @@ static int mcux_lpc_ctimer_init_common(const struct device *dev)
 		LOG_ERR("clock control device not ready");
 		return -ENODEV;
 	}
+
+#ifdef CONFIG_COUNTER_MCUX_CTIMER_LPC84X
+	int err = clock_control_on(config->clock_dev, config->clock_subsys);
+
+	if (err) {
+		LOG_ERR("Failed to enable clock (err %d)", err);
+		return err;
+	}
+#endif
 
 	for (uint8_t chan = 0; chan < NUM_CHANNELS; chan++) {
 		data->channels[chan].alarm_callback = NULL;
