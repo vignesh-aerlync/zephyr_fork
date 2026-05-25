@@ -309,6 +309,16 @@ if(CONFIG_SOC_SERIES_LPC51U68 OR CONFIG_SOC_SERIES_LPC54XXX OR CONFIG_SOC_SERIES
   set(CONFIG_MCUX_COMPONENT_driver.lpc_iocon ON)
 endif()
 
+if(CONFIG_SOC_SERIES_LPC84X)
+  if(CONFIG_PINCTRL_LPC84X)
+    set(CONFIG_MCUX_COMPONENT_driver.swm ON)
+    set(CONFIG_MCUX_COMPONENT_driver.lpc_iocon_lite ON)
+  endif()
+  set_variable_ifdef(CONFIG_UART_LPC84X          CONFIG_MCUX_COMPONENT_driver.lpc_miniusart)
+  zephyr_library_compile_definitions_ifdef(CONFIG_UART_LPC84X FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL=1)
+  set_variable_ifdef (CONFIG_SOC_FLASH_LPC84X_IAP CONFIG_MCUX_COMPONENT_driver.iap)
+endif()
+
 if(CONFIG_SOC_LPC55S36)
   set_variable_ifdef(CONFIG_ADC_MCUX_LPADC CONFIG_MCUX_COMPONENT_driver.vref_1)
   set_variable_ifdef(CONFIG_DAC_MCUX_LPDAC CONFIG_MCUX_COMPONENT_driver.vref_1)

@@ -1,0 +1,26 @@
+/*
+ * Copyright (c) 2026 Aerlync Labs Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include "mem.h"
+#include <nxp/lpc/nxp_lpc84x.dtsi>
+
+/*
+ * @note:
+ *
+ * LPC845: 16 KB SRAM consisting of two contiguous 8 KB banks.
+ * The upper 8 KB (SRAM1 at 0x1000_2000) is automatically
+ * included in the contiguous region by the hardware bus matrix.
+ *
+ * ISP SRAM note: The 2 KB ISP RAM reservation at 0x1000_0000
+ * applies ONLY when the device is in ISP boot mode (bootloader).
+ * During normal IAP calls from user application code, the ROM
+ * does NOT reserve any fixed SRAM region. The application owns
+ * the full 16 KB during normal execution.
+ */
+
+&sram0 {
+	reg = <0x10000000 DT_SIZE_K(16)>;
+};
