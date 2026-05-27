@@ -1,0 +1,21 @@
+# Copyright (c) 2026 Aerlync Labs Inc
+# SPDX-License-Identifier: Apache-2.0
+
+tests:
+  input.lpc8xx_capt.yhport:
+    platform_allow:
+      - lpc845brk
+    extra_args: DTC_OVERLAY_FILE="boards/lpc845brk_yhport.overlay"
+    tags:
+      - drivers
+      - input
+
+  input.lpc8xx_capt.acomp:
+    platform_allow:
+      - lpc845brk
+    extra_args: DTC_OVERLAY_FILE="boards/lpc845brk_acomp.overlay"
+    extra_conf_files:
+      - prj_acomp.conf
+    tags:
+      - drivers
+      - input

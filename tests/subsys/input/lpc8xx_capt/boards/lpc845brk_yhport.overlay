@@ -1,0 +1,20 @@
+/*
+ * Copyright (c) 2026 Aerlync Labs Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+&capt {
+	status = "okay";
+	pinctrl-0 = <&capt_default>;
+	pinctrl-names = "default";
+	clock-source = "fro";
+	clock-divider = <5>;
+	xpins = <0>;
+	touch-lower;
+	threshold = <47>;
+	inactive-xpins-mode = <1>;
+	measurement-delay = <0>;
+	reset-delay = <3>;
+	poll-count = <250>;
+};
