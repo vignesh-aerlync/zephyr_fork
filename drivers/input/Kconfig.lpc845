@@ -1,0 +1,35 @@
+# Copyright (c) 2026, Aerlync Labs Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config INPUT_LPC845_CAP_TOUCH
+	bool "NXP LPC845 Capacitive Touch"
+	default y
+	depends on DT_HAS_NXP_LPC845_CAPTOUCH_ENABLED
+	help
+	  Enable support for the NXP LPC845 Capacitive Touch
+
+choice INPUT_LPC845_CAP_TOUCH_OPERATING_MODE
+	prompt "CAPT Operating Mode"
+	default INPUT_LPC845_CAP_TOUCH_INTERRUPT_MODE
+	depends on INPUT_LPC845_CAP_TOUCH
+	help
+	  Choose between interrupt-driven or continuous polling mode.
+
+config INPUT_LPC845_CAP_TOUCH_INTERRUPT_MODE
+	bool "Interrupt-driven mode"
+	help
+	  Driver only reacts to hardware interrupts.
+
+config INPUT_LPC845_CAP_TOUCH_POLLING_MODE
+	bool "Continuous polling mode"
+	help
+	  Hardware continuously monitors pins.
+endchoice
+
+config INPUT_LPC845_CAP_TOUCH_POLL_INTERVAL_MS
+	int "Software polling interval in milliseconds"
+	default 50
+	depends on INPUT_LPC845_CAP_TOUCH_POLLING_MODE
+	help
+	  Interval in milliseconds between periodic status polls of the CapTouch
+	  controller when continuous polling mode is selected.
