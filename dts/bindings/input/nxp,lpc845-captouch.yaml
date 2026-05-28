@@ -1,0 +1,81 @@
+# Copyright (c) 2026 Aerlync Labs Inc
+# SPDX-License-Identifier: Apache-2.0
+
+description: NXP LPC845 Capacitive Touch
+
+compatible: "nxp,lpc845-captouch"
+
+include: [base.yaml, pinctrl-device.yaml]
+
+properties:
+  reg:
+    required: true
+
+  interrupts:
+    required: true
+
+  clocks:
+    required: true
+
+  clock-source:
+    type: string
+    enum: ["fro", "main", "syspll", "frodiv", "wdt"]
+    default: "fro"
+    description: CAPT clock source
+
+  clock-divider:
+    type: int
+    required: true
+    description: CAPT Functional clock divider (0-15).
+
+  touch-lower:
+    type: boolean
+    description: Enable Touch-Lower mode.
+
+  threshold:
+    type: int
+    required: true
+    description: Touch detection threshold (0-4095).
+
+  poll-count:
+    type: int
+    default: 250
+    description: Time delay between polling rounds (0-255)
+
+  xpins:
+    type: array
+    required: true
+    description: |
+      List of CAPT X pins to enable (e.g. <0> for X0).
+      These pins CAPT X0 to CAPT X8 are physically mapped to the hardware CAPT controller.
+
+  inactive-xpins-mode:
+    type: int
+    enum: [0, 1]
+    default: 1
+    description: |
+      Mode of inactive X pins:
+      0: High-Z
+      1: Driven Low
+
+  measurement-delay:
+    type: int
+    enum: [0, 1, 2, 3]
+    default: 0
+    description: |
+      Delay before measuring voltage:
+      0: No Wait
+      1: 3 FCLKs
+      2: 5 FCLKs
+      3: 9 FCLKs
+
+  reset-delay:
+    type: int
+    enum: [0, 1, 2, 3]
+    default: 3
+    description: |
+      Delay of resetting or draining capacitor:
+      0: No Wait
+      1: 3 FCLKs
+      2: 5 FCLKs
+      3: 9 FCLKs

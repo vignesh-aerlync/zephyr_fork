@@ -108,6 +108,14 @@ static uint32_t lpc84x_get_fclk_freq(uint32_t fclk_inst)
 		}                                                                                  \
 	} while (0)
 
+#define CAPT_CLKSELECT(label)                                                                      \
+	do {                                                                                       \
+		if (DT_NODE_HAS_STATUS(DT_NODELABEL(label), okay)) {                               \
+			CLOCK_Select(CLK_MUX_DEFINE(CAPTCLKSEL,                                    \
+						    PERIPH_CLK_MUX_SEL(DT_NODELABEL(label))));     \
+		}                                                                                  \
+	} while (0)
+
 static int lpc84x_clock_control_on(const struct device *dev, clock_control_subsys_t sub_system)
 {
 	struct lpc84x_clock_data *data = dev->data;
@@ -150,6 +158,9 @@ static int lpc84x_clock_control_on(const struct device *dev, clock_control_subsy
 		break;
 	case LPC84X_CLK_SPI1:
 		PERIPH_CLK_SELECT(spi1, LPC84X_FCLK_SPI1);
+		break;
+	case LPC84X_CLK_CAPT:
+		CAPT_CLKSELECT(capt);
 		break;
 
 	/* Peripherals without FCLK muxing */
@@ -203,6 +214,7 @@ static int lpc84x_clock_control_off(const struct device *dev, clock_control_subs
 	case LPC84X_CLK_SPI1:
 	case LPC84X_CLK_DMA:
 	case LPC84X_CLK_FLASH:
+	case LPC84X_CLK_CAPT:
 		CLOCK_DisableClock((clock_ip_name_t)clk_id);
 		break;
 	default:
@@ -213,6 +225,36 @@ static int lpc84x_clock_control_off(const struct device *dev, clock_control_subs
 	k_mutex_unlock(&data->lock);
 
 	return ret;
+}
+
+/*Capacitive Touch (CAPT) clock source select through CAPTCLKSEL register */
+static uint32_t lpc84x_get_capt_freq(void)
+{
+	uint32_t freq = 0U;
+	uint32_t sel = SYSCON->CAPTCLKSEL & SYSCON_CAPTCLKSEL_SEL_MASK;
+
+	switch (sel) {
+	case 0U: /* FRO */
+		freq = CLOCK_GetFroFreq();
+		break;
+	case 1U: /* Main Clock */
+		freq = CLOCK_GetMainClkFreq();
+		break;
+	case 2U: /* Sys PLL */
+		freq = CLOCK_GetSystemPLLFreq();
+		break;
+	case 3U: /* FRO Div */
+		freq = CLOCK_GetFroFreq() >> 1U;
+		break;
+	case 4U: /* WDT Osc */
+		freq = CLOCK_GetWdtOscFreq();
+		break;
+	default:
+		freq = 0U;
+		break;
+	}
+
+	return freq;
 }
 
 static int lpc84x_clock_control_get_rate(const struct device *dev,
@@ -259,6 +301,9 @@ static int lpc84x_clock_control_get_rate(const struct device *dev,
 		break;
 	case LPC84X_CLK_SPI1:
 		*rate = lpc84x_get_fclk_freq(LPC84X_FCLK_SPI1);
+		break;
+	case LPC84X_CLK_CAPT:
+		*rate = lpc84x_get_capt_freq();
 		break;
 	default:
 		return -ENOTSUP;
