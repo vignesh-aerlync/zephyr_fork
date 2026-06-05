@@ -160,6 +160,13 @@
 			interrupts = <20 0>;
 			dma-channels = <25>;
 			#dma-cells = <1>;
+		};
+
+		acomp0: acomp@40024000 {
+			compatible = "nxp,lpc84x-acomp";
+			reg = <0x40024000 0x4000>;
+			clocks = <&syscon LPC84X_CLK_ACMP>;
+			interrupts = <11 2>;
 			status = "disabled";
 		};
 	};
