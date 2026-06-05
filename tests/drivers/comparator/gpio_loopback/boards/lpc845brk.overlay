@@ -1,0 +1,25 @@
+/*
+ * Copyright (c) 2026 Aerlync Labs Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	aliases {
+		test-comp = &acomp0;
+	};
+
+	zephyr,user {
+		test-gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&acomp0 {
+	status = "okay";
+	pinctrl-0 = <&acomp0_default>;
+	pinctrl-names = "default";
+	positive-input = <1>;	/* ACMP_I1 */
+	negative-input = <0>;	/* Voltage ladder output */
+	ladder-enable;
+	ladder-value = <15>;
+};
