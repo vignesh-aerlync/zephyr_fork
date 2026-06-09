@@ -100,6 +100,14 @@
 				 <LPC84X_PINMUX_M(LPC84X_SWM_USART0_RXD, P0_24)>;
 		};
 	};
+
+	capt_default: capt_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_F(LPC84X_SWM_CAPT_X0, P0_31)>,
+				 <LPC84X_PINMUX_F(LPC84X_SWM_CAPT_YL, P1_8)>,
+				 <LPC84X_PINMUX_F(LPC84X_SWM_CAPT_YH, P1_9)>;
+		};
+	};
 };
 
 &gpio0 {
