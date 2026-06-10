@@ -72,10 +72,10 @@ static void lpc_pinctrl_apply_swm(SWM_Type *base, pinctrl_soc_pin_t pin)
 
 static void lpc_pinctrl_apply_iocon(IOCON_Type *base, pinctrl_soc_pin_t pin)
 {
-	uint8_t cfg = LPC84X_IOCON_CFG(pin.iocon_cfg);
+	uint32_t cfg = LPC84X_IOCON_CFG(pin.iocon_cfg);
 	uint8_t iocon_idx = LPC84X_IOCON_INDEX(pin.iocon_cfg);
 
-	IOCON_PinMuxSet(base, iocon_idx, (uint32_t)cfg << 3);
+	IOCON_PinMuxSet(base, iocon_idx, cfg);
 }
 
 int pinctrl_configure_pins(const pinctrl_soc_pin_t *pins, uint8_t pin_cnt, uintptr_t reg)
