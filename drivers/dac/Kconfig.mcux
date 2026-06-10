@@ -52,3 +52,10 @@ config DAC_NXP_HPDAC
 	depends on DT_HAS_NXP_HPDAC_ENABLED
 	help
 	  Enable the driver for the NXP HPDAC.
+
+config DAC_LPC84X
+	bool "LPC84X DAC driver"
+	default y
+	depends on DT_HAS_NXP_LPC84X_DAC_ENABLED
+	help
+	  DAC driver for LPC84x SoC.

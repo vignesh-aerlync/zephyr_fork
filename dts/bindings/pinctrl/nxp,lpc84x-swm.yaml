@@ -43,3 +43,7 @@ child-binding:
       nxp,hysteresis:
         type: boolean
         description: Enable input hysteresis.
+
+      nxp,dac-mode:
+        type: boolean
+        description: Enable DAC mode.

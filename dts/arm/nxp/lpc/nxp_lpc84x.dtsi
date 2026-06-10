@@ -152,6 +152,22 @@
 			num-lines = <8>;
 			status = "disabled";
 		};
+
+		dac0: dac@40014000 {
+			compatible = "nxp,lpc84x-dac";
+			reg = <0x40014000 0x1000>;
+			clocks = <&syscon LPC84X_CLK_DAC0>;
+			#io-channel-cells = <1>;
+			status = "disabled";
+		};
+
+		dac1: dac@40018000 {
+			compatible = "nxp,lpc84x-dac";
+			reg = <0x40018000 0x1000>;
+			clocks = <&syscon LPC84X_CLK_DAC1>;
+			#io-channel-cells = <1>;
+			status = "disabled";
+		};
 	};
 };
 

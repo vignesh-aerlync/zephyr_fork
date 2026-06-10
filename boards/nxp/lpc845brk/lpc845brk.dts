@@ -80,6 +80,12 @@
 	pinctrl-names = "default";
 };
 
+&dac0 {
+	status = "okay";
+	pinctrl-0 = <&dac0_default>;
+	pinctrl-names = "default";
+};
+
 &swm {
 	status = "okay";
 
@@ -87,6 +93,13 @@
 		group0 {
 			pinmux = <LPC84X_PINMUX_M(LPC84X_SWM_USART0_TXD, P0_25)>,
 				 <LPC84X_PINMUX_M(LPC84X_SWM_USART0_RXD, P0_24)>;
+		};
+	};
+
+	dac0_default: dac0_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_F(LPC84X_SWM_DAC_OUT0, P0_17)>;
+			nxp,dac-mode;
 		};
 	};
 };

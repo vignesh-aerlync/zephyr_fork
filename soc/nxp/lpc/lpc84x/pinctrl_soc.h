@@ -22,7 +22,7 @@ typedef struct {
 	/** Switch Matrix configuration (pinmux). */
 	uint16_t swm_cfg;
 	/** IOCON configuration (pull-up/down, open-drain, etc.). */
-	uint16_t iocon_cfg;
+	uint32_t iocon_cfg;
 } pinctrl_soc_pin_t;
 
 /* SWM decoding macros */
@@ -33,23 +33,23 @@ typedef struct {
 
 /* IOCON decoding macros */
 #define LPC84X_IOCON_INDEX(cfg) ((cfg) & 0xFF)
-#define LPC84X_IOCON_CFG(cfg)   (((cfg) >> 8) & 0xFF)
+#define LPC84X_IOCON_CFG(cfg)   ((cfg) >> 8)
 
 /**
  * @brief Build IOCON configuration bits for storage in pinctrl_soc_pin_t.
- * We store the IOCON register bits 3..10 directly, shifted right by 3.
- * This includes: Bias (MODE), Hysteresis (HYS), Invert (INV), and Open-drain (OD).
+ * We store the IOCON register bits directly.
+ * This includes: Bias (MODE), Hysteresis (HYS), Invert (INV), Open-drain (OD), and DAC Mode.
  */
 
 #define Z_PINCTRL_IOCON_BIAS(node_id)                                                              \
 	((DT_PROP(node_id, bias_pull_down) ? 1U : 0U) | (DT_PROP(node_id, bias_pull_up) ? 2U : 0U))
 
 #define Z_PINCTRL_IOCON_PINCFG(node_id)                                                            \
-	((IOCON_PIO_MODE(Z_PINCTRL_IOCON_BIAS(node_id)) |                                          \
-	  IOCON_PIO_HYS(DT_PROP(node_id, nxp_hysteresis)) |                                        \
-	  IOCON_PIO_INV(DT_PROP(node_id, nxp_invert)) |                                            \
-	  IOCON_PIO_OD(DT_PROP(node_id, drive_open_drain))) >>                                     \
-	 3)
+	(IOCON_PIO_MODE(Z_PINCTRL_IOCON_BIAS(node_id)) |                                           \
+	 IOCON_PIO_HYS(DT_PROP_OR(node_id, nxp_hysteresis, 0)) |                                   \
+	 IOCON_PIO_INV(DT_PROP_OR(node_id, nxp_invert, 0)) |                                       \
+	 IOCON_PIO_OD(DT_PROP_OR(node_id, drive_open_drain, 0)) |                                  \
+	 (DT_PROP_OR(node_id, nxp_dac_mode, 0) ? IOCON_PIO_DACMODE_MASK : 0))
 
 /**
  * @brief Utility macro to initialize a pinmux + configuration entry.

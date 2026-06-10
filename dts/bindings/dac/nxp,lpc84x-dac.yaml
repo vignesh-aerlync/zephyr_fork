@@ -1,0 +1,39 @@
+# Copyright (c) 2026 Aerlync Labs Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  NXP LPC84x 10-bit Digital-to-Analog Converter (DAC).
+  The LPC84x DAC uses a resistor string architecture with a buffered
+  output. It supports a selectable speed vs. power tradeoff via the
+  BIAS bit in the Control Register (CR).
+
+compatible: "nxp,lpc84x-dac"
+
+include: [dac-controller.yaml, pinctrl-device.yaml]
+
+properties:
+  reg:
+    required: true
+
+  clocks:
+    required: true
+    description: |
+      Clock source for the DAC peripheral.
+
+  interrupts:
+    description: |
+      Optional interrupt for the DAC DMA/Timer timeout requests.
+
+  low-power-mode:
+    type: boolean
+    description: |
+      If present, sets the BIAS bit to 1. This configures the DAC for a
+      settling time of 2.5 us and a maximum current of 350 uA (400 kHz max
+      update rate). If omitted, the DAC defaults to a settling time of 1 us
+      and a maximum current of 700 uA (1 MHz max update rate).
+
+  "#io-channel-cells":
+    const: 1
+
+io-channel-cells:
+  - output

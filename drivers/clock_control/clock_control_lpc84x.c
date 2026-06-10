@@ -159,6 +159,8 @@ static int lpc84x_clock_control_on(const struct device *dev, clock_control_subsy
 	case LPC84X_CLK_SWM:
 	case LPC84X_CLK_IOCON:
 	case LPC84X_CLK_FLASH:
+	case LPC84X_CLK_DAC0:
+	case LPC84X_CLK_DAC1:
 		break;
 
 	default:
@@ -201,6 +203,8 @@ static int lpc84x_clock_control_off(const struct device *dev, clock_control_subs
 	case LPC84X_CLK_SPI0:
 	case LPC84X_CLK_SPI1:
 	case LPC84X_CLK_FLASH:
+	case LPC84X_CLK_DAC0:
+	case LPC84X_CLK_DAC1:
 		CLOCK_DisableClock((clock_ip_name_t)clk_id);
 		break;
 	default:
