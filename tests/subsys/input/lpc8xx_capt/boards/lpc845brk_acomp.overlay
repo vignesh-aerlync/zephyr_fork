@@ -1,0 +1,39 @@
+/*
+ * Copyright (c) 2026 Aerlync Labs Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+&swm {
+	acomp0_default: acomp0_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_F(LPC84X_SWM_ACMP_INPUT5, P0_30)>;
+		};
+	};
+};
+
+&acomp0 {
+	status = "okay";
+	pinctrl-0 = <&acomp0_default>;
+	pinctrl-names = "default";
+	positive-input = <5>;
+	negative-input = <0>;
+	hysteresis = <3>;
+	ladder-enable;
+	ladder-value = <8>;
+};
+
+&capt {
+	status = "okay";
+	pinctrl-0 = <&capt_default>;
+	pinctrl-names = "default";
+	comparator = <&acomp0>;
+	clock-source = "fro";
+	clock-divider = <11>;
+	xpins = <0>;
+	touch-lower;
+	threshold = <200>;
+	measurement-delay = <0>;
+	reset-delay = <3>;
+	poll-count = <250>;
+};

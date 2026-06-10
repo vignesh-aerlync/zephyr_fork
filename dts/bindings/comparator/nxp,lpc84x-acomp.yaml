@@ -1,0 +1,79 @@
+# Copyright (c) 2026, Aerlync Labs Inc
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  NXP LPC84X Analog Comparator (ACOMP)
+
+compatible: "nxp,lpc84x-acomp"
+
+include:
+  - base.yaml
+  - pinctrl-device.yaml
+
+properties:
+  reg:
+    required: true
+
+  interrupts:
+    required: true
+
+  positive-input:
+    required: true
+    type: int
+    enum: [0, 1, 2, 3, 4, 5, 6, 7]
+    description: |
+      Positive comparator input.
+      0 = Voltage ladder output
+      1 = ACMP_I1 (PIO0_0)
+      2 = ACMP_I2 (PIO0_1)
+      3 = ACMP_I3 (PIO0_14)
+      4 = ACMP_I4 (PIO0_23)
+      5 = ACMP_I5 (PIO0_30)
+      6 = Internal reference voltage
+      7 = DACOUT0
+
+  negative-input:
+    required: true
+    type: int
+    enum: [0, 1, 2, 3, 4, 5, 6, 7]
+    description: |
+      Negative comparator input.
+      0 = Voltage ladder output
+      1 = ACMP_I1 (PIO0_0)
+      2 = ACMP_I2 (PIO0_1)
+      3 = ACMP_I3 (PIO0_14)
+      4 = ACMP_I4 (PIO0_23)
+      5 = ACMP_I5 (PIO0_30)
+      6 = Internal reference voltage
+      7 = DACOUT0
+
+  hysteresis:
+    type: int
+    default: 0
+    enum: [0, 1, 2, 3]
+    description: |
+      Hysteresis level selection:
+      0 = none
+      1 = 5mV
+      2 = 10mV
+      3 = 20mV
+
+  ladder-enable:
+    type: boolean
+    description: |
+      Enable voltage ladder.
+
+  ladder-value:
+    type: int
+    default: 0
+    description: |
+      Voltage ladder value (0-31).
+
+  ladder-vref:
+    type: int
+    default: 0
+    enum: [0, 1]
+    description: |
+      Voltage ladder reference.
+        0 = VDD
+        1 = VDDCMP
