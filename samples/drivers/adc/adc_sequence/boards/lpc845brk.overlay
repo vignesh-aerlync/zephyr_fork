@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) 2026 Aerlync Labs Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <zephyr/dt-bindings/adc/adc.h>
+
+/ {
+	aliases {
+		adc0 = &adc;
+	};
+
+	zephyr,user {
+		io-channels = <&adc 0>, <&adc 1>;
+	};
+};
+
+&adc {
+	status = "okay";
+	pinctrl-0 = <&adc0_ch0_default &adc0_ch1_default>;
+	pinctrl-names = "default";
+
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	channel@0 {
+		reg = <0>;
+		zephyr,gain = "ADC_GAIN_1";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,resolution = <12>;
+		zephyr,vref-mv = <3300>;
+	};
+
+	channel@1 {
+		reg = <1>;
+		zephyr,gain = "ADC_GAIN_1";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,resolution = <12>;
+		zephyr,vref-mv = <3300>;
+	};
+};
+
+&swm {
+	adc0_ch0_default: adc0_ch0_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_F(LPC84X_SWM_ADC_CHN0, P0_7)>;
+			bias-disable;
+		};
+	};
+
+	adc0_ch1_default: adc0_ch1_default {
+		group0 {
+			pinmux = <LPC84X_PINMUX_F(LPC84X_SWM_ADC_CHN1, P0_6)>;
+			bias-disable;
+		};
+	};
+};
